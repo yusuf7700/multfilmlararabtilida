@@ -20,9 +20,6 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-<button id="topButton">
-    <i class="fa-solid fa-arrow-up"></i>
-    </button>
 </head>
 
 
@@ -66,7 +63,30 @@ Telegram
 
 </a>
 
+<button id="menuToggle" aria-label="Menyu">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
 </header>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<nav class="mobile-nav" id="mobileNav">
+
+    <a href="#">Bosh sahifa</a>
+
+    <a href="#movies">Multfilmlar</a>
+
+    <a href="#serials">Multseriallar</a>
+
+    <a href="https://t.me/arabtili_va_multfilm" target="_blank" class="mobile-telegram-btn">
+        <i class="fa-brands fa-telegram"></i>
+        Telegram
+    </a>
+
+</nav>
 
 
 
@@ -318,7 +338,13 @@ d="M0,224L48,213.3C96,203,192,181,288,186.7C384,192,480,224,576,224C672,224,768,
     </div>
     
     </div>
-    
+
+    <div class="no-results" id="noResults">
+        <div class="no-results-icon">🔍</div>
+        <h3>Bunday multserial topilmadi</h3>
+        <p>Boshqa nom bilan qidirib ko'ring yoki barcha ro'yxatni tomosha qiling.</p>
+    </div>
+
     </section>
     <!-- WHY US -->
 
@@ -436,3 +462,61 @@ d="M0,224L48,213.3C96,203,192,181,288,186.7C384,192,480,224,576,224C672,224,768,
     </div>
     
     </section>
+
+    <!-- FOOTER -->
+
+    <footer class="site-footer">
+
+        <div class="footer-top">
+
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="Arab Tili va Multfilm">
+                    <div>
+                        <h2>Arab Tili va Multfilm</h2>
+                        <p>Arabcha Multfilm Platformasi</p>
+                    </div>
+                </div>
+                <p class="footer-desc">
+                    Arab tilidagi eng sara multfilm va multseriallarni bir joyda
+                    to'plovchi bepul platforma. Qidiring, tanlang va Telegram
+                    orqali darhol tomosha qiling.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Havolalar</h3>
+                <a href="#">Bosh sahifa</a>
+                <a href="#movies">Multfilmlar</a>
+                <a href="#serials">Multseriallar</a>
+            </div>
+
+            <div class="footer-links">
+                <h3>Telegram</h3>
+                <a href="https://t.me/arabtili_va_multfilm" target="_blank">
+                    <i class="fa-brands fa-telegram"></i> Kanal
+                </a>
+                <a href="https://t.me/arabtili_va_multfilm_bot" target="_blank">
+                    <i class="fa-solid fa-robot"></i> Bot
+                </a>
+                <a href="https://t.me/arabtili_va_multfilm_bot" target="_blank">
+                    <i class="fa-solid fa-paper-plane"></i> Taklif yuborish
+                </a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> Arab Tili va Multfilm. Barcha huquqlar himoyalangan.</p>
+        </div>
+
+    </footer>
+
+    <button id="topButton">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
