@@ -791,7 +791,7 @@ background-position:center;
 
 }
 
-/* TELEFON / PLANSHET (touch) — desktopdagi kabi qoramtir overlay, doim ko'rinadi (hover shart emas) */
+/* TELEFON / PLANSHET (touch) — desktopdagi kabi, faqat bosgandan keyin qoramtir overlay chiqadi */
 
 @media (hover:none), (pointer:coarse){
 
@@ -814,6 +814,14 @@ background-position:center;
     rgba(0,0,0,0)
     );
 
+    opacity:0;
+
+    transition:opacity .35s ease;
+
+    }
+
+    .serial-card.active::after{
+
     opacity:1;
 
     }
@@ -823,7 +831,7 @@ background-position:center;
     position:absolute;
 
     left:0;
-    bottom:0;
+    bottom:-100%;
 
     width:100%;
 
@@ -832,6 +840,14 @@ background-position:center;
     z-index:10;
 
     text-align:center;
+
+    transition:bottom .4s ease;
+
+    }
+
+    .serial-card.active .serial-info{
+
+    bottom:0;
 
     }
 
