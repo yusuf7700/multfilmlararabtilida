@@ -564,6 +564,8 @@ background-position:center;
 
 .serial-section{
 
+    scroll-margin-top:90px;
+
     padding:110px 8%;
     
     background:#fff;
@@ -1109,6 +1111,8 @@ background-position:center;
 
 .telegram-section{
 
+    scroll-margin-top:90px;
+
     padding:110px 8%;
     
     display:grid;
@@ -1119,6 +1123,14 @@ background-position:center;
     
     background:#eef9ff;
     
+    }
+
+    .telegram-section .section-title{
+
+    grid-column:1 / -1;
+
+    margin-bottom:10px;
+
     }
     
     .telegram-card{
