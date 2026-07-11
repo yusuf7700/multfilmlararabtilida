@@ -1,87 +1,138 @@
-window.addEventListener("scroll",()=>{
+/* =======================================================
+   ARAB TILI VA MULTFILM — app.js
+   Header scroll, mobil menyu, qidiruv, tepaga chiqish,
+   scroll-animatsiyalar
+======================================================= */
 
-    const header=document.querySelector("header");
-    
-    if(window.scrollY>80){
-    
-    header.style.height="70px";
-    
-    header.style.background="rgba(255,255,255,.82)";
-    
-    }else{
-    
-    header.style.height="85px";
-    
-    header.style.background="rgba(255,255,255,.55)";
-    
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* ---------- FOOTER YIL ---------- */
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ---------- HEADER SCROLL ---------- */
+  const header = document.querySelector("header");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 80) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
     }
-    
+  });
+
+  /* ---------- MOBIL MENYU ---------- */
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileNav = document.getElementById("mobileNav");
+  const mobileOverlay = document.getElementById("mobileOverlay");
+
+  function openMenu() {
+    mobileNav.classList.add("active");
+    mobileOverlay.classList.add("active");
+    menuToggle.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMenu() {
+    mobileNav.classList.remove("active");
+    mobileOverlay.classList.remove("active");
+    menuToggle.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  if (menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      if (mobileNav.classList.contains("active")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
-    window.addEventListener("scroll", () => {
+  }
 
-        const header = document.querySelector("header");
-    
-        if (window.scrollY > 80) {
-    
-            header.style.height = "70px";
-            header.style.background = "rgba(255,255,255,.82)";
-    
-        } else {
-    
-            header.style.height = "85px";
-            header.style.background = "rgba(255,255,255,.55)";
-    
-        }
-    
-    });
-    const searchInput = document.querySelector(".search-area input");
-const cards = document.querySelectorAll(".serial-card");
+  if (mobileOverlay) {
+    mobileOverlay.addEventListener("click", closeMenu);
+  }
 
-searchInput.addEventListener("keyup", () => {
+  document.querySelectorAll(".mobile-nav a").forEach(link => {
+    link.addEventListener("click", closeMenu);
+  });
 
-    const value = searchInput.value.toLowerCase();
+  /* ---------- QIDIRUV ---------- */
+  const searchInput = document.querySelector(".search-area input");
+  const cards = document.querySelectorAll(".serial-card");
+  const noResults = document.getElementById("noResults");
+
+  function filterCards() {
+    const value = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
 
     cards.forEach(card => {
-
-        const title = card.querySelector("h3").textContent.toLowerCase();
-
-        if (title.includes(value)) {
-
-            card.style.display = "block";
-
-        } else {
-
-            card.style.display = "none";
-
-        }
-
+      const title = card.querySelector("h3").textContent.toLowerCase();
+      const match = title.includes(value);
+      card.style.display = match ? "" : "none";
+      if (match) visibleCount++;
     });
 
-});
-const topButton = document.getElementById("topButton");
-
-window.addEventListener("scroll", () => {
-
-    if(window.scrollY > 400){
-
-        topButton.style.display = "block";
-
-    }else{
-
-        topButton.style.display = "none";
-
+    if (noResults) {
+      noResults.style.display = visibleCount === 0 ? "block" : "none";
     }
+  }
 
-});
+  if (searchInput) {
+    searchInput.addEventListener("keyup", filterCards);
+  }
 
-topButton.onclick = () => {
+  const searchButton = document.querySelector(".search-area button");
+  if (searchButton) {
+    searchButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      filterCards();
+      document.getElementById("serials")?.scrollIntoView({ behavior: "smooth" });
+    });
+  }
 
-    window.scrollTo({
+  /* ---------- TEPAGA CHIQISH TUGMASI ---------- */
+  const topButton = document.getElementById("topButton");
 
-        top:0,
-
-        behavior:"smooth"
-
+  if (topButton) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        topButton.classList.add("show");
+      } else {
+        topButton.classList.remove("show");
+      }
     });
 
-};
+    topButton.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  /* ---------- SCROLL ANIMATSIYALARI (kartalar va bo'limlar) ---------- */
+  const revealTargets = document.querySelectorAll(
+    ".serial-card, .why-card, .telegram-card, .section-title"
+  );
+
+  revealTargets.forEach(el => el.classList.add("reveal"));
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("reveal-visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: "0px 0px -60px 0px"
+  });
+
+  revealTargets.forEach(el => revealObserver.observe(el));
+
+  /* Kartalarga tartibli kechikish (stagger) berish */
+  document.querySelectorAll(".serial-grid .serial-card").forEach((card, i) => {
+    card.style.transitionDelay = `${(i % 6) * 0.08}s`;
+  });
+
+});
