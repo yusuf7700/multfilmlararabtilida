@@ -1114,22 +1114,18 @@ background-position:center;
     scroll-margin-top:90px;
 
     padding:110px 8%;
-    
-    display:grid;
-    
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    
-    gap:35px;
-    
+
     background:#eef9ff;
-    
+
     }
 
-    .telegram-section .section-title{
+    .telegram-grid{
 
-    grid-column:1 / -1;
+    display:grid;
 
-    margin-bottom:10px;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:35px;
 
     }
     
@@ -1827,9 +1823,13 @@ background-position:center;
 
     .telegram-section{
 
-    grid-template-columns:1fr;
-
     padding:70px 6%;
+
+    }
+
+    .telegram-grid{
+
+    grid-template-columns:1fr;
 
     }
 
